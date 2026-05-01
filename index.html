@@ -118,13 +118,32 @@ var SHOWS = [
 function pct(){ return Math.min(used/TOTAL*100, 100); }
 
 function updateBar(){
-  document.getElementById("barFill").style.width = pct() + "%";
-  document.getElementById("barTime").textContent = used + " /120分";
-  var left = TOTAL - used;
-  document.getElementById("remaining").textContent =
-    left > 0 ? "あと " + left + "分 みられるよ！" : "おしまい！";
-}
+  // 1. 必要な要素を読み込む
+  var barFill = document.getElementById("barFill");
+  var barTime = document.getElementById("barTime");
+  var remainingText = document.getElementById("remaining");
+  var overlay = document.getElementById("overlay");
 
+  // 2. バーの長さを更新
+  barFill.style.width = pct() + "%";
+  barTime.textContent = used + " / 120分";
+  
+  var left = TOTAL - used;
+
+  // 3. 残り時間の判定（②のロジック）
+  if (left < 7) { 
+    // 残りが最短の7分より短くなったら
+    remainingText.textContent = "おしまい！";
+    
+    // 0.3秒後に終了画面を出す
+    setTimeout(function() {
+      overlay.classList.add("show");
+    }, 300);
+  } else {
+    // 7分以上あれば残り時間を表示
+    remainingText.textContent = "あと " + left + "分 みられるよ！";
+  }
+}
 function updateLog(){
   var row = document.getElementById("logRow");
   row.innerHTML = "";
