@@ -76,7 +76,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",sa
     <div class="bar-time" id="barTime">0 / 120&#20998;</div>
     <div class="flag">&#127937;</div>
   </div>
-  <div class="remaining" id="remaining">&#12354;&#12392; 60&#20998; &#12415;&#12425;&#12428;&#12427;&#12424;&#65281;</div>
+  <div class="remaining" id="remaining">&#12354;&#12392; 120&#20998; &#12415;&#12425;&#12428;&#12427;&#12424;&#65281;</div>
 </div>
 
 <div class="log-section">
@@ -120,7 +120,7 @@ function pct(){ return Math.min(used/TOTAL*100, 100); }
 
 function updateBar(){
   document.getElementById("barFill").style.width = pct() + "%";
-  document.getElementById("barTime").textContent = used + " / 120分";
+  document.getElementById("barTime").textContent = used + " /120分";
   var left = TOTAL - used;
   document.getElementById("remaining").textContent =
     left > 0 ? "あと " + left + "分 みられるよ！" : "おしまい！";
